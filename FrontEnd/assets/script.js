@@ -201,7 +201,7 @@ async function addWork(title, categoryId, image) {
 
   const formData = new FormData();
   formData.append("title", title);
-  formData.append("categoryId", categoryId);
+  formData.append("category", categoryId);
   formData.append("image", image);
 console.log("addWork",title, image, categoryId)
   
@@ -212,13 +212,11 @@ console.log("addWork",title, image, categoryId)
       },
       body: formData
     });
-/*
     if (!response.ok) {
       throw new Error("L'ajout de l'image a échoué");
     }
-
     const data = await response.json();
-    return data;*/
+    return data;
   
 }
 
@@ -236,7 +234,7 @@ validateBtn.addEventListener("click", async (e) => {
   const image = imageInput.files[0];
 console.log(categoryId, image, title)
   if (title && categoryId && image) {
-  /*  await addWork(title, categoryId, image);*/
+  await addWork(title, categoryId, image);
     fetchData(() => {
       closeModal("modal2");
     });
