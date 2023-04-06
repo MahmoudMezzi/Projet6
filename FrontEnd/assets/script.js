@@ -226,7 +226,6 @@ console.log("addWork",title, image, categoryId)
 const validateBtn = document.querySelector("#modal2 .validate-btn");
 validateBtn.addEventListener("click", async (e) => {
   e.preventDefault();
-  e.stopPropagation();
   console.log("ca clique")
   const titleInput = document.getElementById("title");
   const categoryInput = document.getElementById("category");
@@ -237,7 +236,7 @@ validateBtn.addEventListener("click", async (e) => {
   const image = imageInput.files[0];
 console.log(categoryId, image, title)
   if (title && categoryId && image) {
-   await addWork(title, categoryId, image);
+  /*  await addWork(title, categoryId, image);*/
     fetchData(() => {
       closeModal("modal2");
     });
