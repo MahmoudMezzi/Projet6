@@ -6,7 +6,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
@@ -20,7 +19,7 @@
 		<ul>
 			<li><a href="./index.html#portfolio"> projets</a></li>
 			<li><a href="#contact">contact</a></li>
-			<li><a href="./login-page.html" id="logout-button">logout</a></li>
+			<li><a href="./login-page.html" id="logout-button">login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -38,51 +37,55 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets<a href="#" id="modify-btn"><p>modifier</p></a></h2>
+
+		<div class="title-m">
+			<h2>Mes Projets</h2>
+			<a href="#" id="modify-btn">
+				<p><i class="fas fa-pen-to-square"></i>modifier</p>
+			</a>
+		</div>
 
 
 		<div id="btn-section"></div>
-		<div class="gallery" id="modal-gallery"></div>
+		<div class="gallery"></div>
 
-
-<div id="modal1" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h3>Galerie Photo</h3>
-    <div class="btn-section-modal">
-		<div class="gallery" id="modal-gallery"></div>
-      <button type="button" class="btn-add">Ajouter une photo</button>
-      <button type="button" class="delete-btn">Supprimer la galerie</button>
-    </div>
-  </div>
-</div>
+		<div id="modal1" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<h3>Galerie Photo</h3>
+			<div class="btn-section-modal">
+				<div class="gallery"></div>
+			<button type="button" class="btn-add">Ajouter une photo</button>
+			<button type="button" class="delete-btn">Supprimer la galerie</button>
+			</div>
+		</div>
+		</div>
 
   
  
-  <div id="modal2" class="modal">
-	<div class="modal-content">
-		<button type="button" class="back-btn"><i class="fas fa-arrow-left"></i></button>
-	  <span class="close">&times;</span>
-	  <h3>Ajout une photo</h3>
-	  <div class="modal2-content">
-		<div class="img-add">
-			<input type="file" id="file"/>
-			<div class="image-display-change">
+		<div id="modal2" class="modal">
+			<div class="modal-content">
+				<button type="button" class="back-btn"><i class="fas fa-arrow-left"></i></button>
+			<span class="close">&times;</span>
+			<h3>Ajout une photo</h3>
+			<div class="modal2-content">
+				<div class="img-add">
+					<input type="file" id="file">
+					<div class="image-display-change">
+					</div>
+					<p>jpg, png : 4mo max</p>
+				</div>	
+				<h4>Titre</h4>
+				<input class="option-box" type="text" id="title" placeholder="">
+				<h4>Catégorie</h4>
+				<select class="option-box" id="category">
+				</select>
+				<div class="validate-box">
+					<button class="validate-btn" type="button">valider</button>
+				</div>
 			</div>
-			<p>jpg, png : 4mo max</p>
-		</div>	
-		<h4>Titre</h4>
-		<input type="text" id="title" placeholder="Titre" />
-		<h4>Catégorie</h4>
-		<input type="number" id="category" placeholder="ID de catégorie" />
-
-			<button class="validate-btn" type="button">valider</button>
+			</div>
 		</div>
-	  </div>
-	</div>
-  </div>
-  
-
 		
 	</section>
 	<section id="contact">

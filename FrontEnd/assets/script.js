@@ -1,8 +1,42 @@
-const logoutButton = document.getElementById("logout-button");
-logoutButton.addEventListener("click", () => {
-  localStorage.removeItem("token");
-  window.location.href = "./login-page.html";
+function updateLoginLogoutLink() {
+  const loginLogoutLink = document.getElementById("logout-button");
+  
+  if (localStorage.getItem("token")) {
+    loginLogoutLink.textContent = "logout";
+    loginLogoutLink.href = "#";
+    loginLogoutLink.addEventListener("click", () => {
+      localStorage.removeItem("token");
+      window.location.href = "./login-page.html";
+    });
+  } else {
+    loginLogoutLink.textContent = "login";
+    loginLogoutLink.href = "./login-page.html";
+    loginLogoutLink.removeEventListener("click", () => {
+      localStorage.removeItem("token");
+      window.location.href = "./login-page.html";
+    });
+  }
+}
+
+updateLoginLogoutLink();
+
+
+
+const modifyBtn = document.getElementById("modify-btn");
+const token = localStorage.getItem("token");
+
+if (token) {
+  modifyBtn.style.display = "block";
+} else {
+  modifyBtn.style.display = "none";
+}
+
+modifyBtn.addEventListener("click", () => {
+  openModal("modal1");
+  displayModalWorks();
 });
+
+
 
 /**************************************** */
 async function fetchData() {
@@ -93,6 +127,11 @@ function createFilterButtons(data) {
     categoriesMap.set(work.category.id, work.category.name);
   });
 
+  const categoryNamesToIds = {};
+
+  // Récupérer l'élément select
+  const categorySelect = document.getElementById("category");
+
   categoriesMap.forEach((categoryName, categoryId) => {
     const btn = document.createElement("button");
     btn.classList.add("btn-filter");
@@ -101,8 +140,27 @@ function createFilterButtons(data) {
       filterWorksByCategory(categoryId);
     });
     btnSection.appendChild(btn);
+
+    // Ajouter la correspondance entre le nom de la catégorie et l'ID de la catégorie
+    categoryNamesToIds[categoryName] = categoryId;
+
+    // Ajouter une option de sélection pour la catégorie
+    const option = document.createElement("option");
+    option.value = categoryName;
+    option.textContent = categoryName;
+    categorySelect.appendChild(option);
   });
+
+  return categoryNamesToIds;
 }
+
+let categoryNamesToIds = {};
+
+fetchData().then((data) => {
+  categoryNamesToIds = createFilterButtons(data);
+  displayWorks(data, ".gallery");
+});
+
 /********************************************************* */
 function filterWorksByCategory(categoryId) {
   const figures = document.querySelectorAll(".gallery figure");
@@ -224,17 +282,18 @@ console.log("addWork",title, image, categoryId)
 const validateBtn = document.querySelector("#modal2 .validate-btn");
 validateBtn.addEventListener("click", async (e) => {
   e.preventDefault();
-  console.log("ca clique")
+
   const titleInput = document.getElementById("title");
-  const categoryInput = document.getElementById("category");
+  const categorySelect = document.getElementById("category");
   const imageInput = document.getElementById("file");
 
   const title = titleInput.value;
-  const categoryId = categoryInput.value;
+  const categoryName = categorySelect.value;
+  const categoryId = categoryNamesToIds[categoryName];
   const image = imageInput.files[0];
-console.log(categoryId, image, title)
+
   if (title && categoryId && image) {
-  await addWork(title, categoryId, image);
+    await addWork(title, categoryId, image);
     fetchData(() => {
       closeModal("modal2");
     });
@@ -242,6 +301,29 @@ console.log(categoryId, image, title)
     alert("Veuillez remplir tous les champs et sélectionner une image.");
   }
 });
+
+
+function checkIfAllFieldsAreFilled() {
+  const titleInput = document.getElementById("title");
+  const categoryInput = document.getElementById("category");
+  const imageInput = document.getElementById("file");
+  const validateBtn = document.querySelector("#modal2 .validate-btn");
+
+  if (titleInput.value && categoryInput.value && imageInput.files.length > 0) {
+    validateBtn.classList.add("valider-enabled");
+  } else {
+    validateBtn.classList.remove("valider-enabled");
+  }
+}
+
+const titleInput = document.getElementById("title");
+const categoryInput = document.getElementById("category");
+const imageInput = document.getElementById("file");
+
+titleInput.addEventListener("input", checkIfAllFieldsAreFilled);
+categoryInput.addEventListener("input", checkIfAllFieldsAreFilled);
+imageInput.addEventListener("change", checkIfAllFieldsAreFilled);
+
 
 
 

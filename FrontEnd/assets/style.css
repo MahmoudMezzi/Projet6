@@ -160,7 +160,6 @@ h1 > span {
 
 * a {
   text-decoration: none;
-  text-decoration-style: none;
   color: black;
 }
 
@@ -223,8 +222,6 @@ a:hover {
 }
 #portfolio h2 {
   text-align: center;
-  margin-bottom: 1em;
-  margin-top: 5em;
 }
 
 #btn-section {
@@ -474,7 +471,7 @@ label {
   background-color: #cbd6dc;
   color: #306685;
   font-size: 14px;
-  font-weight: 500px;
+  font-weight: 500;
   font-family: "Work Sans";
   border: 1px transparent;
   padding: 10px 33px;
@@ -512,7 +509,7 @@ h4 {
   margin-bottom: 5px;
 }
 
-.valider {
+.validate-btn {
   width: 237px;
   height: 36px;
   background-color: #a7a7a7;
@@ -594,4 +591,40 @@ nav ul li a:hover {
   cursor: pointer;
   display: none;
   color: black;
+}
+.title-m {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 7em;
+  margin-bottom: 3em;
+}
+.title-m a {
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  margin-left: 1em;
+}
+
+.title-m a p i {
+  margin-right: 5px;
+  margin-left: 10px;
+  font-weight: 300;
+}
+
+.validate-box {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  border-top: 1px solid #B3B3B3;
+  height: 25px;
+  margin-top: 30px;
+}
+.option-box {
+  box-sizing: border-box;
+  border: 1px transparent;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  height: 51px;
 }
