@@ -43,7 +43,7 @@ async function fetchData() {
   const response = await fetch("http://localhost:5678/api/works");
   const data = await response.json();
   displayWorks(data, ".gallery");
-  createFilterButtons(data);
+  
 
 
   return data;
@@ -132,6 +132,12 @@ function createFilterButtons(data) {
   // Récupérer l'élément select
   const categorySelect = document.getElementById("category");
 
+  // Ajouter une option vide au début des options
+  const emptyOption = document.createElement("option");
+  emptyOption.value = "";
+  emptyOption.textContent = "";
+  categorySelect.appendChild(emptyOption);
+
   categoriesMap.forEach((categoryName, categoryId) => {
     const btn = document.createElement("button");
     btn.classList.add("btn-filter");
@@ -144,15 +150,19 @@ function createFilterButtons(data) {
     // Ajouter la correspondance entre le nom de la catégorie et l'ID de la catégorie
     categoryNamesToIds[categoryName] = categoryId;
 
-    // Ajouter une option de sélection pour la catégorie
-    const option = document.createElement("option");
-    option.value = categoryName;
-    option.textContent = categoryName;
-    categorySelect.appendChild(option);
+    // Ne pas ajouter l'option "All" dans le menu déroulant
+    if (categoryId !== 0) {
+      // Ajouter une option de sélection pour la catégorie
+      const option = document.createElement("option");
+      option.value = categoryName;
+      option.textContent = categoryName;
+      categorySelect.appendChild(option);
+    }
   });
 
   return categoryNamesToIds;
 }
+
 
 let categoryNamesToIds = {};
 
