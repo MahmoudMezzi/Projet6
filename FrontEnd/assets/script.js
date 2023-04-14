@@ -1,6 +1,6 @@
 function updateLoginLogoutLink() {
   const loginLogoutLink = document.getElementById("logout-button");
-  
+
   if (localStorage.getItem("token")) {
     loginLogoutLink.textContent = "logout";
     loginLogoutLink.href = "#";
@@ -20,8 +20,6 @@ function updateLoginLogoutLink() {
 
 updateLoginLogoutLink();
 
-
-
 const modifyBtn = document.getElementById("modify-btn");
 const token = localStorage.getItem("token");
 
@@ -36,50 +34,43 @@ modifyBtn.addEventListener("click", () => {
   displayModalWorks();
 });
 
-
-
 /**************************************** */
 async function fetchData() {
   const response = await fetch("http://localhost:5678/api/works");
   const data = await response.json();
   displayWorks(data, ".gallery");
-  
-
 
   return data;
 }
-
-
 
 /************************************************* */
 async function deleteWork(workId) {
   const url = `http://localhost:5678/api/works/${workId}`;
 
   try {
-    const confirmed = confirm("Êtes-vous sûr(e) de vouloir supprimer cette image ?");
-    
+    const confirmed = confirm(
+      "Êtes-vous sûr(e) de vouloir supprimer cette image ?"
+    );
+
     if (!confirmed) {
       return; // annulation de suppression !
     }
-    
+
     const response = await fetch(url, {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
 
     if (!response.ok) {
-      throw new Error('La suppression de l\'image a échoué');
+      throw new Error("La suppression de l'image a échoué");
     }
-
-   
   } catch (error) {
-    console.error('Erreur:', error);
+    console.error("Erreur:", error);
   }
 }
-
 
 /**************************************************** */
 function displayWorks(data, targetElement, modalModif = false) {
@@ -162,8 +153,6 @@ function createFilterButtons(data) {
 
   return categoryNamesToIds;
 }
-
-
 let categoryNamesToIds = {};
 
 fetchData().then((data) => {
@@ -225,7 +214,6 @@ function setupModal() {
   });
 
   window.addEventListener("click", (event) => {
-  
     if (event.target === modal1) {
       closeModal("modal1");
     }
@@ -262,8 +250,6 @@ fileInput.addEventListener("change", (event) => {
   reader.readAsDataURL(file);
 });
 
-
-
 async function addWork(title, categoryId, image) {
   const url = "http://localhost:5678/api/works";
 
@@ -271,23 +257,21 @@ async function addWork(title, categoryId, image) {
   formData.append("title", title);
   formData.append("category", categoryId);
   formData.append("image", image);
-console.log("addWork",title, image, categoryId)
-  
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${localStorage.getItem("token")}`,
-      },
-      body: formData
-    });
-    if (!response.ok) {
-      throw new Error("L'ajout de l'image a échoué");
-    }
-    const data = await response.json();
-    return data;
-  
-}
+  console.log("addWork", title, image, categoryId);
 
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    body: formData,
+  });
+  if (!response.ok) {
+    throw new Error("L'ajout de l'image a échoué");
+  }
+  const data = await response.json();
+  return data;
+}
 
 const validateBtn = document.querySelector("#modal2 .validate-btn");
 validateBtn.addEventListener("click", async (e) => {
@@ -312,7 +296,6 @@ validateBtn.addEventListener("click", async (e) => {
   }
 });
 
-
 function checkIfAllFieldsAreFilled() {
   const titleInput = document.getElementById("title");
   const categoryInput = document.getElementById("category");
@@ -333,11 +316,6 @@ const imageInput = document.getElementById("file");
 titleInput.addEventListener("input", checkIfAllFieldsAreFilled);
 categoryInput.addEventListener("input", checkIfAllFieldsAreFilled);
 imageInput.addEventListener("change", checkIfAllFieldsAreFilled);
-
-
-
-
-
 
 fetchData();
 setupModal();

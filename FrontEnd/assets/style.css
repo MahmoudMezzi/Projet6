@@ -356,7 +356,7 @@ footer nav ul {
 .form-container .btn:hover,
 .open-button:hover {
   opacity: 1;
-  background: #0E2F28;
+  background: #0e2f28;
 }
 
 label {
@@ -463,11 +463,11 @@ label {
   margin-bottom: 30px;
 }
 
-.img-add .fas{
-  color: #B9C5CC;;
+.img-add .fas {
+  color: #b9c5cc;
   position: absolute;
-    top: 206px;
-    font-size: 57px;
+  top: 206px;
+  font-size: 57px;
 }
 
 .add-photo {
@@ -490,7 +490,7 @@ label {
   opacity: 0.8;
 }
 
-.add-photo:hover{
+.add-photo:hover {
   opacity: 1;
   transform: scale(1.05);
   transition: 0.3s ease;
@@ -505,14 +505,14 @@ label {
   opacity: 0;
 }
 .img-add p {
-  font-family: 'Work Sans';
-font-style: normal;
-font-weight: 400;
-font-size: 10px;
-line-height: 12px;
-text-align: center;
-color: #444444;
-margin-bottom: 10px;
+  font-family: "Work Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  text-align: center;
+  color: #444444;
+  margin-bottom: 10px;
 }
 #modal-content {
   height: 20px;
@@ -531,6 +531,7 @@ margin-bottom: 10px;
 
 h4 {
   margin-bottom: 5px;
+  margin-top: 20px;
 }
 
 .validate-btn {
@@ -549,16 +550,13 @@ h4 {
   opacity: 0.5;
 }
 .valider-enabled {
-  background: #1D6154;
+  background: #1d6154;
   opacity: 1;
 }
-
 
 select {
   border-radius: 0px;
 }
-
-
 
 .trash-bin {
   position: absolute;
@@ -587,7 +585,7 @@ select {
   grid-template-columns: repeat(5, 1fr);
 }
 .submit-style:hover {
-  background: #0E2F28;
+  background: #0e2f28;
 }
 
 nav ul li a:hover {
@@ -595,7 +593,7 @@ nav ul li a:hover {
   color: black;
 }
 .modal .image-display-change img {
- display: flex;
+  display: flex;
   width: 170px;
   height: 168px;
   position: absolute;
@@ -640,7 +638,7 @@ nav ul li a:hover {
   display: flex;
   justify-content: center;
   margin-top: 10px;
-  border-top: 1px solid #B3B3B3;
+  border-top: 1px solid #b3b3b3;
   height: 25px;
   margin-top: 30px;
 }
