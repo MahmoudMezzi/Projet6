@@ -1,5 +1,4 @@
 const button = document.querySelector(".btn");
-console.log(button);
 const email = document.getElementById("email");
 const password = document.getElementById("psw");
 const errorMsg = document.getElementById("error-msg");
@@ -42,5 +41,5 @@ button.addEventListener("click", () => {
     });
 });
 
-const modifyBtn = document.getElementById("modify-btn");
-const token = localStorage.getItem("token");
+
+
