@@ -504,6 +504,10 @@ label {
   cursor: pointer;
   opacity: 0;
 }
+
+#file {
+  display: none;
+}
 .img-add p {
   font-family: "Work Sans";
   font-style: normal;

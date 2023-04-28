@@ -120,10 +120,9 @@ function createFilterButtons(data) {
 
   const categoryNamesToIds = {};
 
-  // Récupérer l'élément select
+  
   const categorySelect = document.getElementById("category");
 
-  // Ajouter une option vide au début des options
   const emptyOption = document.createElement("option");
   emptyOption.value = "";
   emptyOption.textContent = "";
@@ -138,12 +137,9 @@ function createFilterButtons(data) {
     });
     btnSection.appendChild(btn);
 
-    // Ajouter la correspondance entre le nom de la catégorie et l'ID de la catégorie
     categoryNamesToIds[categoryName] = categoryId;
 
-    // Ne pas ajouter l'option "All" dans le menu déroulant
     if (categoryId !== 0) {
-      // Ajouter une option de sélection pour la catégorie
       const option = document.createElement("option");
       option.value = categoryName;
       option.textContent = categoryName;
