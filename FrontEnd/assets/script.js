@@ -67,10 +67,19 @@ async function deleteWork(workId) {
     if (!response.ok) {
       throw new Error("La suppression de l'image a échoué");
     }
+
+    // Mise à jour de l'affichage après la suppression
+    fetchData().then((data) => {
+      categoryNamesToIds = createFilterButtons(data);
+      displayWorks(data, ".gallery");
+    });
+
   } catch (error) {
     console.error("Erreur:", error);
   }
 }
+
+
 
 /**************************************************** */
 function displayWorks(data, targetElement, modalModif = false) {
@@ -120,8 +129,10 @@ function createFilterButtons(data) {
 
   const categoryNamesToIds = {};
 
-  
   const categorySelect = document.getElementById("category");
+
+  // Ajoutez cette ligne pour vider le menu déroulant avant de le remplir à nouveau
+  categorySelect.innerHTML = "";
 
   const emptyOption = document.createElement("option");
   emptyOption.value = "";
@@ -146,9 +157,9 @@ function createFilterButtons(data) {
       categorySelect.appendChild(option);
     }
   });
-
   return categoryNamesToIds;
 }
+
 let categoryNamesToIds = {};
 
 fetchData().then((data) => {
@@ -190,6 +201,9 @@ function closeModal(modalId) {
   const modal = document.getElementById(modalId);
   modal.style.display = "none";
 }
+
+
+
 /******************************************************** */
 function setupModal() {
   // modale 1
@@ -233,6 +247,7 @@ function setupModal() {
   });
 }
 
+
 /************************************************************ */
 const fileInput = document.getElementById("file");
 const imageDisplay = document.querySelector(".image-display-change");
@@ -268,7 +283,18 @@ async function addWork(title, categoryId, image) {
   const data = await response.json();
   return data;
 }
+function resetForm() {
+  // Réinitialiser les champs du formulaire
+  const titleInput = document.getElementById("title");
+  const categorySelect = document.getElementById("category");
+  const imageInput = document.getElementById("file");
+  const imageDisplay = document.querySelector(".image-display-change");
 
+  titleInput.value = "";
+  categorySelect.value = "";
+  imageInput.value = "";
+  imageDisplay.innerHTML = "";
+}
 const validateBtn = document.querySelector("#modal2 .validate-btn");
 validateBtn.addEventListener("click", async (e) => {
   e.preventDefault();
@@ -284,13 +310,19 @@ validateBtn.addEventListener("click", async (e) => {
 
   if (title && categoryId && image) {
     await addWork(title, categoryId, image);
-    fetchData(() => {
-      closeModal("modal2");
-    });
+    await fetchData(); // Met à jour les données
+    closeModal("modal2"); // Ferme la modale 2
+    openModal("modal1"); // Ouvre la modale 1
+    displayModalWorks(); // Met à jour l'affichage des œuvres dans la modale 1
+    resetForm(); // Réinitialiser les champs du formulaire
   } else {
     alert("Veuillez remplir tous les champs et sélectionner une image.");
   }
 });
+
+
+
+
 
 function checkIfAllFieldsAreFilled() {
   const titleInput = document.getElementById("title");
@@ -312,6 +344,9 @@ const imageInput = document.getElementById("file");
 titleInput.addEventListener("input", checkIfAllFieldsAreFilled);
 categoryInput.addEventListener("input", checkIfAllFieldsAreFilled);
 imageInput.addEventListener("change", checkIfAllFieldsAreFilled);
+
+
+
 
 fetchData();
 setupModal();
